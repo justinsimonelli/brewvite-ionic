@@ -1,10 +1,20 @@
 angular.module('app.services', [])
+	.factory('LoginFactory', function($cordovaFacebook){
+		var loginFactory = {};
 
-.factory('BlankFactory', [function(){
+		loginFactory.facebookLogin = function() {
+			$cordovaFacebook.llogin(["public_profile", "email", "user_friends"])
+    .then(function(success) {
+      // { id: "634565435",
+      //   lastName: "bob"
+      //   ...
+      // }
+    }, function (error) {
+      // error
+    });
+    	}
 
-}])
-
-.service('BlankService', [function(){
-
-}]);
+		return loginFactory;
+	})
+	;
 

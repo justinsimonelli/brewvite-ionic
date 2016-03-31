@@ -5,7 +5,18 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services', 'app.directives', 'ngCordova', 'cordovaFacebookProvider'])
+
+.config(function($cordovaFacebookProvider){
+    if (window.cordova.platformId == "browser") {
+      var appId = 618876251595117,
+      version = "v2.0";
+      cordovaFacebookProvider.browserInit(appId, version);
+      // version is optional. It refers to the version of API you may want to use.
+    }
+    
+
+  })
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
