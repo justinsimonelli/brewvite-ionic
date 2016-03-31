@@ -1,17 +1,15 @@
 angular.module('app.services', [])
-	.factory('LoginFactory', function($cordovaFacebook){
+	.factory('LoginFactory', function(DataFactory, $cordovaSQLite){
 		var loginFactory = {};
+		var db = DataFactory.getDB();
 
-		loginFactory.facebookLogin = function() {
-			$cordovaFacebook.llogin(["public_profile", "email", "user_friends"])
-    .then(function(success) {
-      // { id: "634565435",
-      //   lastName: "bob"
-      //   ...
-      // }
-    }, function (error) {
-      // error
-    });
+		loginFactory.facebookLogin = function($log) {
+			$cordovaSQLite.execute( db, "SELECT TOKEN FROM AUTH_TOKENS WHERE PROVIDER = 'facebook'" )
+				.then( function( result ) {
+			    		console.log(result.rows[0].token)
+				    }, function( error ) {
+				      return error;
+				    } );	
     	}
 
 		return loginFactory;

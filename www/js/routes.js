@@ -13,6 +13,7 @@ angular.module('app.routes', [])
       url: '/forgot-password',
       templateUrl: 'templates/auth/forgot-password.html'
     })
+    /*
     .state('tabs', {
       url: '/tab',
       abstract: true,
@@ -66,7 +67,9 @@ angular.module('app.routes', [])
           templateUrl: 'templates/contact.html'
         }
       }
-    });
+    })
+    */
+    ;
 
 
    $urlRouterProvider.otherwise('/sign-in');

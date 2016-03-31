@@ -8,9 +8,12 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
+ 
+    <!-- ngCordova -->
+    <!-- IMPORTANT : SHOULD be after ionic bundle and before cordova.js -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+ 
+    <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -22,6 +25,7 @@
     <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
+    <script src="js/factories/dataFactory.js"></script>
 
 
     <!-- Only required for Tab projects w/ pages in multiple tabs 
@@ -37,5 +41,4 @@
     <ion-nav-view></ion-nav-view>
 
   </body>
-  <div id="fb-root"></div>
 </html>
