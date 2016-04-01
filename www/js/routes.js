@@ -1,4 +1,4 @@
-angular.module('app.routes', [])
+angular.module('brewvite.routes', [])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -7,13 +7,14 @@ angular.module('app.routes', [])
     .state('signin', {
       url: '/sign-in',
       templateUrl: 'templates/auth/sign-in.html',
-      controller: 'SignInCtrl'
-    })
-    .state('/forgot-password', {
-      url: '/forgot-password',
-      templateUrl: 'templates/auth/forgot-password.html'
+      controller: 'AuthController',
     })
     /*
+    .state('/forgot-password', {
+      url: '/forgot-password',
+      templateUrl: 'templates/auth/forgot-password.html',
+      controller: 'AuthController'
+    })
     .state('tabs', {
       url: '/tab',
       abstract: true,
@@ -74,5 +75,4 @@ angular.module('app.routes', [])
 
    $urlRouterProvider.otherwise('/sign-in');
 
-})
-;
+});

@@ -1,35 +1,38 @@
-(function() {
-    'use strict';
+angular
+  .module("brewvite.factory", [])
+  .factory("DataFactory", function(){
+    var factory = {};
     var db = null;
 
-    document.addEventListener('deviceready', onDeviceReady, false);
+    //var DataFactory = function($log, $http, $cordovaSQLite, $q)
 
-    function onDeviceReady() {
-        if (window.cordova) {
-            db = window.sqlitePlugin.openDatabase({name: "brewvite.db",iosDatabaseLocation: "default"});
-            db.executeSql("CREATE TABLE IF NOT EXISTS auth_tokens(id integer, provider text primary key, token text, endpoint text, sort integer DEFAULT 0)", [], function (res) {
-              console.log('successfully created table')
-            }, function(error) {
-              console.log('error creating table, error=' + error.message);
-            });
-        } else {
-            db = window.openDatabase("brewvite.db", "1.0", "brewvite.db", 1024 * 1024 * 100);
+    /** PRIVATE METHODS **/
+
+    function initDBAndTables(){
+      if( window.cordova ){
+        db = window.sqlitePlugin.openDatabase({name: "brewvite.db",iosDatabaseLocation: "default"});
+      } else{
+        db = window.openDatabase("brewvite.db", "1.0", "brewvite.db", 1024 * 1024 * 100);
+      }
+
+      $cordovaSQLite.execute(db, "PRAGMA table_info(auth_tokens)").then(function(result){
+        if( result.rows.length == 0 ){
+          $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS auth_tokens(id integer, provider text primary key, token text, endpoint text, sort integer DEFAULT 0)");
         }
+      }, function(error){
+        //console.error(error)
+      });
     }
 
-    var DataFactory = function($log, $http, $cordovaSQLite, $q) {
+    /** PUBLIC METHODS **/
 
-        // Public
-        var getDB = function() {
-            return db;
-        };
+    factory.getDB = function(){
+      if(db == null){
+        db = initDBAndTables();
+      }
+      return db;
+    }
 
-        return {
-            getDB: getDB
-        };
-    };
+    return factory;
 
-    angular
-        .module("brewvite")
-        .factory("DataFactory", DataFactory);
-}());
+  });
