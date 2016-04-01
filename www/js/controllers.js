@@ -1,12 +1,12 @@
-angular.module('brewvite.controllers', [])
-
-.controller('AuthController', ['$scope', function($scope, $cordovaOauth, authTokens, DataFactory) {
+angular
+.module('brewvite.controllers', ['brewvite.factory'])
+.controller('AuthController', ['$scope', 'DataFactory', function($scope, DataFactory, $cordovaOauth, authTokens) {
 	$scope.classShow = "hide";
 
 	$scope.facebookLogin = function() {
 
 		console.log("inside facebookLogin. authTokens=", authTokens);
-        //DataFactory.getDB();
+        DataFactory.getDB();
 
 		/*
        	$cordovaOauth.facebook("618876251595117", ["email"]).then(function(result) {

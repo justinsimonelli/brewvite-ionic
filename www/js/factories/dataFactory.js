@@ -1,6 +1,6 @@
 angular
   .module("brewvite.factory", [])
-  .factory("DataFactory", function(){
+  .factory("DataFactory", function($cordovaSQLite){
     var factory = {};
     var db = null;
 
