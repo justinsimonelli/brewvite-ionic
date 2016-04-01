@@ -28,7 +28,7 @@ angular
 
     factory.getDB = function(){
       if(db == null){
-        db = initDBAndTables();
+        initDBAndTables();
       }
       return db;
     }

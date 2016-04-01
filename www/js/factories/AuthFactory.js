@@ -1,17 +1,17 @@
 angular
   .module("brewvite.factory")
-  .factory("AuthFactory", function($log, $http, $cordovaSQLite, $q, DataFactory, $cordovaOauth){
+  .factory("AuthFactory", function($log, $http, $cordovaSQLite, $q, DataFactory){
     var factory = {};
 
-
     factory.getStoredAuthTokens = function(){
-      var tokensQuery = "SELECT * FROM AUTH_TOKENS";
+      var tokensQuery = "SELECT * FROM AUTH_TOKENS",
+          tokensPromise = null;
       $log.debug("inside getStoredAuthTokens")
 
       if( !tokensPromise ){
         tokensPromise = $q.defer();
 
-        $cordovaSQLite.execute(db, query).then(function(result){
+        $cordovaSQLite.execute(DataFactory.getDB(), tokensQuery).then(function(result){
           if( result.rows.length > 0 ){
             var tmpTokens = [];
             for( var i=0; i < result.rows.length; i++ ){
