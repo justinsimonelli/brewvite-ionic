@@ -6,7 +6,6 @@ angular
     factory.getStoredAuthTokens = function(){
       var tokensQuery = "SELECT * FROM AUTH_TOKENS",
           tokensPromise = null;
-      $log.debug("inside getStoredAuthTokens")
 
       if( !tokensPromise ){
         tokensPromise = $q.defer();
@@ -22,7 +21,7 @@ angular
           }
 
           authTokens = tmpTokens;
-          tokensPromise.resolve(authTokens)
+          tokensPromise.resolve({token:"facebook"})
         }, function(error){
           console.error("error querying for authTokens.", error);
         }).finally( function(){

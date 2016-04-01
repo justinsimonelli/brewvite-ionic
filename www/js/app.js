@@ -1,5 +1,5 @@
 // brewvite
-angular.module('brewvite', ['ionic', 'brewvite.routes', 'brewvite.controllers', 'ngCordova'])
+angular.module('brewvite', ['ionic', 'brewvite.routes', 'brewvite.controllers', 'brewvite.factory', 'ngCordova', 'ngCordovaOauth'])
 
 .config(['$logProvider', function($logProvider){
     $logProvider.debugEnabled(true);

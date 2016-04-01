@@ -4,10 +4,15 @@ angular.module('brewvite.routes', [])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-    .state('signin', {
-      url: '/sign-in',
-      templateUrl: 'templates/auth/sign-in.html',
-      controller: 'AuthController',
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/auth/login.html',
+      resolve: {
+        authTokens: function(AuthFactory){
+          return AuthFactory.getStoredAuthTokens();
+        }
+      },
+      controller: 'AuthController'
     })
     /*
     .state('/forgot-password', {
@@ -73,6 +78,6 @@ angular.module('brewvite.routes', [])
     ;
 
 
-   $urlRouterProvider.otherwise('/sign-in');
+   $urlRouterProvider.otherwise('/login');
 
 });
